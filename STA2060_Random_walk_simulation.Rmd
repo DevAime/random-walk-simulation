@@ -1,0 +1,125 @@
+---
+title: "Untitled"
+author: "Aime Muganga"
+date: "2025-03-08"
+output: html_document
+---
+
+
+## Random Walk with high probability of moving up
+
+```{r}
+set.seed(123)  
+
+# Parameters
+n_actual <- 20
+n_predict <- 10
+p <- 3/4  # Probability of moving up
+q <- 1 - p  # Probability of moving down
+
+# Generate actual random walk
+steps_actual <- sample(c(1, -1), size = n_actual, replace = TRUE, prob = c(p, q))
+position_actual <- cumsum(c(0, steps_actual))  # Cumulative sum
+
+# Predict future steps
+steps_predict <- sample(c(1, -1), size = n_predict, replace = TRUE, prob = c(p, q))
+position_predict <- cumsum(c(position_actual[length(position_actual)], steps_predict))
+
+# Combine for plotting
+total_steps <- c(position_actual, position_predict[-1])
+
+# Plot
+plot(0:(n_actual + n_predict), total_steps, type = "l", col = "blue", lwd = 2,
+     xlab = "Steps", ylab = "Position", main = "Random Walk with Prediction")
+
+# Add points for actual steps
+points(0:n_actual, position_actual, col = "blue", pch = 16, cex = 1.2)
+
+# Add predicted steps
+lines(n_actual:(n_actual + n_predict), total_steps[(n_actual + 1):length(total_steps)], col = "red", lwd = 2)
+points(n_actual:(n_actual + n_predict), total_steps[(n_actual + 1):length(total_steps)], col = "red", pch = 16, cex = 1.2)
+
+# Add legend
+legend("topright", legend = c("Actual", "Predicted"), col = c("blue", "red"), lwd = 2, pch = 16)
+
+```
+
+## Random walk with high probability of going down
+
+```{r}
+set.seed(123)  
+
+# Parameters
+n_actual <- 20
+n_predict <- 10
+p <- 1/4  # Probability of moving up
+q <- 3/4  # Probability of moving down
+
+# Generate actual random walk
+steps_actual <- sample(c(1, -1), size = n_actual, replace = TRUE, prob = c(p, q))
+position_actual <- cumsum(c(0, steps_actual))  # Cumulative sum
+
+# Predict future steps
+steps_predict <- sample(c(1, -1), size = n_predict, replace = TRUE, prob = c(p, q))
+position_predict <- cumsum(c(position_actual[length(position_actual)], steps_predict))
+
+# Combine for plotting
+total_steps <- c(position_actual, position_predict[-1])
+
+# Plot
+plot(0:(n_actual + n_predict), total_steps, type = "l", col = "blue", lwd = 2,
+     xlab = "Steps", ylab = "Position", main = "Random Walk with Prediction (p = 1/4, q = 3/4)")
+
+# Add points for actual steps
+points(0:n_actual, position_actual, col = "blue", pch = 16, cex = 1.2)
+
+# Add predicted steps
+lines(n_actual:(n_actual + n_predict), total_steps[(n_actual + 1):length(total_steps)], col = "red", lwd = 2)
+points(n_actual:(n_actual + n_predict), total_steps[(n_actual + 1):length(total_steps)], col = "red", pch = 16, cex = 1.2)
+
+# Add legend
+legend("topright", legend = c("Actual", "Predicted"), col = c("blue", "red"), lwd = 2, pch = 16)
+
+```
+
+## Symmetric Random walk
+
+```{r}
+set.seed(123)  # Different seed for a different random walk
+
+# Parameters
+n_actual <- 20
+n_predict <- 10
+p <- 0.5  # Probability of moving up
+q <- 0.5  # Probability of moving down
+
+# Generate actual random walk
+steps_actual <- sample(c(1, -1), size = n_actual, replace = TRUE, prob = c(p, q))
+position_actual <- cumsum(c(0, steps_actual))  # Cumulative sum
+
+# Predict future steps
+steps_predict <- sample(c(1, -1), size = n_predict, replace = TRUE, prob = c(p, q))
+position_predict <- cumsum(c(position_actual[length(position_actual)], steps_predict))
+
+# Combine for plotting
+total_steps <- c(position_actual, position_predict[-1])
+
+# Plot
+plot(0:(n_actual + n_predict), total_steps, type = "l", col = "blue", lwd = 2,
+     xlab = "Steps", ylab = "Position", main = "Symmetric Random Walk (p = 0.5, q = 0.5)")
+
+# Add points for actual steps
+points(0:n_actual, position_actual, col = "blue", pch = 16, cex = 1.2)
+
+# Add predicted steps
+lines(n_actual:(n_actual + n_predict), total_steps[(n_actual + 1):length(total_steps)], col = "red", lwd = 2)
+points(n_actual:(n_actual + n_predict), total_steps[(n_actual + 1):length(total_steps)], col = "red", pch = 16, cex = 1.2)
+
+# Add legend
+legend("topright", legend = c("Actual", "Predicted"), col = c("blue", "red"), lwd = 2, pch = 16)
+
+```
+
+
+
+
